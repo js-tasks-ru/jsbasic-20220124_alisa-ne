@@ -6,10 +6,8 @@ function toggleText() {
 
 	function hideShow() { 
 		count++;
-		count % 2 === 0 ?
-			text.hidden = false
-			: text.hidden = true;
+		count % 2 === 0 ? text.hidden = false : text.hidden = true;
 	}
-
+	
 	btn.addEventListener("click", hideShow);
 }
