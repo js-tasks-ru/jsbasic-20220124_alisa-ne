@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 function initCarousel() {
 
 	const btnRight = document.querySelector('.carousel__arrow_right');
@@ -26,11 +25,9 @@ function initCarousel() {
 
 	function moveLeft() {
 
-		
-	
 		translateX += carouselInnerWidth;
 		carouselInner.style.transform = `translateX(${translateX}px)`;
-		
+
 		if (translateX > -carouselInnerWidth * 3) {
 			btnRight.style.display = '';
 		}
