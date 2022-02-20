@@ -19,15 +19,23 @@ function initCarousel() {
 		}
 		if (translateX === -carouselInnerWidth * 3) {
 			btnRight.style.display = 'none';
-		}	
+		}
+
+		
 	} 
 
 	function moveLeft() {
+
+		
 	
 		translateX += carouselInnerWidth;
 		carouselInner.style.transform = `translateX(${translateX}px)`;
+		
+		if (translateX > -carouselInnerWidth * 3) {
+			btnRight.style.display = '';
+		}
 
-		if (translateX === carouselInnerWidth * 3 || translateX === 0) {
+		if (translateX === 0) {
 			btnLeft.style.display = 'none';
 		}
 	}
