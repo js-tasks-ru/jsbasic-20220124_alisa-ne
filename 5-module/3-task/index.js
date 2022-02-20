@@ -1,5 +1,5 @@
 function initCarousel() {
-
+  
 	const btnRight = document.querySelector('.carousel__arrow_right');
 	const btnLeft = document.querySelector('.carousel__arrow_left');
 	const carouselInner = document.querySelector('.carousel__inner');
@@ -16,11 +16,10 @@ function initCarousel() {
 		if (translateX < 0) {
 			btnLeft.style.display = '';
 		}
+    
 		if (translateX === -carouselInnerWidth * 3) {
 			btnRight.style.display = 'none';
-		}
-
-		
+		}	
 	} 
 
 	function moveLeft() {
