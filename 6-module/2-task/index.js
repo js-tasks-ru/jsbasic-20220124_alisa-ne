@@ -30,7 +30,7 @@ export default class ProductCard {
 				bubbles: true
 			});
 
-				this.btn.dispatchEvent(productAddEvent);
+				this.card.dispatchEvent(productAddEvent);
 			});
 
 		return this.card;

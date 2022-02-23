@@ -9,6 +9,7 @@ export default class Carousel {
 
 
 	render() {
+
 		this.carousel = createElement(
 			`<div class="carousel">
 
@@ -23,13 +24,13 @@ export default class Carousel {
 				<div class="carousel__inner"></div>
 
 			</div>`
-		);
+		); 
 
 		this.carouselInner = this.carousel.querySelector('.carousel__inner');
 		
 		for (let i = 0; i < this.slides.length; i++) {
 			this.carouselInner.insertAdjacentHTML('beforeEnd',
-				`<div class="carousel__slide" data-id='${this.slides[i].id}'>
+				`<div class="carousel__slide" data-id=${this.slides[i].id}>
 					<img src="/assets/images/carousel/${this.slides[i].image}" class="carousel__img" alt="slide">
 					<div class="carousel__caption">
 						<span class="carousel__price">€${this.slides[i].price.toFixed(2)}</span>
@@ -43,29 +44,15 @@ export default class Carousel {
 
 		this.buttons = this.carouselInner.querySelectorAll('.carousel__button');
 		
-		//this.carouselSlide = this.carouselInner.querySelectorAll('.carousel__slide');
-
-	/* 	for (let i = 0; i < this.buttons.length; i++) {
-			this.buttons[i].addEventListener('click', () => {
-
-				const productAddEvent = new CustomEvent("product-add", {
-					detail: this.slides[i].id,
-					bubbles: true
-				});
-
-				this.buttons[i].dispatchEvent(productAddEvent);
-			});
-		}
- */
-		for (const btn of this.buttons) {
+		for (let btn of this.buttons) {
 			btn.addEventListener('click', (event) => {
 
-				const productAddEvent = new CustomEvent("product-add", {
+				let productAddEvent = new CustomEvent("product-add", {
 					detail: event.target.closest('.carousel__slide').getAttribute('data-id'),
 					bubbles: true
 				});
 
-				btn.dispatchEvent(productAddEvent);
+				this.carousel.dispatchEvent(productAddEvent);
 			});
 		}
 
@@ -74,16 +61,45 @@ export default class Carousel {
 		this.carouselInnerWidth = this.carouselInner.offsetWidth;
 		this.translateX = 0;
 		this.btnLeft.style.display = 'none';
+		console.log(this.carouselInnerWidth);
 
-		this.btnRight.addEventListener("click", this.moveRight);
-		this.btnLeft.addEventListener("click", this.moveLeft);
+		this.btnRight.addEventListener("click", () => {
+
+			this.translateX -= this.carouselInnerWidth;
+			this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
+
+			if (this.translateX < 0) {
+				this.btnLeft.style.display = '';
+			}
+
+			if (this.translateX === -this.carouselInnerWidth * (this.slides.length - 1)) {
+				this.btnRight.style.display = 'none';
+			}
+		});
+
+		this.btnLeft.addEventListener("click", () => {
+
+			this.translateX += this.carouselInnerWidth;
+			this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
+
+			if (this.translateX > -this.carouselInnerWidth * (this.slides.length - 1)) {
+				this.btnRight.style.display = '';
+			}
+
+			if (this.translateX === 0) {
+				this.btnLeft.style.display = 'none';
+			}
+		});
 
 		return this.carousel;
 	}
 
 	moveRight() {
+		
+		/* this.carouselInner = document.querySelector('.carousel__inner');
 
 		this.translateX -= this.carouselInnerWidth;
+		
 		this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
 
 		if (this.translateX < 0) {
@@ -92,20 +108,22 @@ export default class Carousel {
 
 		if (this.translateX === -this.carouselInnerWidth * (this.slides.length - 1)) {
 			this.btnRight.style.display = 'none';
-		}
+		} */
 	}
 
 	moveLeft() {
+		
+		/* this.carouselInner = document.querySelector('.carousel__inner');
 
 		this.translateX += this.carouselInnerWidth;
 		this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
 
-		if (this.translateX > -carouselInnerWidth * (this.slides.length - 1)) {
+		if (this.translateX > -this.carouselInnerWidth * (this.slides.length - 1)) {
 			this.btnRight.style.display = '';
 		}
 
 		if (this.translateX === 0) {
 			this.btnLeft.style.display = 'none';
-		}
+		} */
 	}
 }
