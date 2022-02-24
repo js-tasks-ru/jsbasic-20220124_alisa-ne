@@ -58,12 +58,12 @@ export default class Carousel {
 
 		this.btnRight = this.carousel.querySelector('.carousel__arrow_right');
 		this.btnLeft = this.carousel.querySelector('.carousel__arrow_left');
-		this.carouselInnerWidth = this.carouselInner.offsetWidth;
 		this.translateX = 0;
 		this.btnLeft.style.display = 'none';
-		console.log(this.carouselInnerWidth);
+		
 
 		this.btnRight.addEventListener("click", () => {
+			this.carouselInnerWidth = this.carouselInner.offsetWidth;
 
 			this.translateX -= this.carouselInnerWidth;
 			this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
@@ -78,6 +78,7 @@ export default class Carousel {
 		});
 
 		this.btnLeft.addEventListener("click", () => {
+			this.carouselInnerWidth = this.carouselInner.offsetWidth;
 
 			this.translateX += this.carouselInnerWidth;
 			this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
@@ -94,9 +95,9 @@ export default class Carousel {
 		return this.carousel;
 	}
 
-	moveRight() {
+	/* moveRight() {
 		
-		/* this.carouselInner = document.querySelector('.carousel__inner');
+		this.carouselInnerWidth = this.carouselInner.offsetWidth;
 
 		this.translateX -= this.carouselInnerWidth;
 		
@@ -108,12 +109,12 @@ export default class Carousel {
 
 		if (this.translateX === -this.carouselInnerWidth * (this.slides.length - 1)) {
 			this.btnRight.style.display = 'none';
-		} */
+		} 
 	}
 
 	moveLeft() {
 		
-		/* this.carouselInner = document.querySelector('.carousel__inner');
+		this.carouselInnerWidth = this.carouselInner.offsetWidth;
 
 		this.translateX += this.carouselInnerWidth;
 		this.carouselInner.style.transform = `translateX(${this.translateX}px)`;
@@ -124,6 +125,6 @@ export default class Carousel {
 
 		if (this.translateX === 0) {
 			this.btnLeft.style.display = 'none';
-		} */
-	}
+		}
+	} */
 }
