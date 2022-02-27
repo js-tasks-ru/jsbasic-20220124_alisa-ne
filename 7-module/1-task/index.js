@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable indent */
+
 import createElement from '../../assets/lib/create-element.js';
 
 export default class RibbonMenu {
@@ -83,11 +82,6 @@ export default class RibbonMenu {
 		}		
 				
 		return this.ribbon;
-	}
-
-
-	btnHideShow() {
-		
 	}
 	
 }

@@ -2,7 +2,12 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
 	constructor() {
-		this.elem = this.render();	
+		this.modal = this.render();
+		this.setTitle = this.setTitle.bind(this);
+		this.setBody = this.setBody.bind(this);
+		this.open = this.open.bind(this);
+		this.close = this.close.bind(this);
+		this.closeEsc = this.closeEsc.bind(this);
 	}
 	
 	render() { 
@@ -37,18 +42,18 @@ export default class Modal {
 	}
 	
 	setTitle(title) { 
-		this.modalTitle = this.elem.querySelector('.modal__title');
+		this.modalTitle = this.modal.querySelector('.modal__title');
 		this.modalTitle.textContent = title;
 	}
 
 	setBody(ModalBodyInner) { 
-		this.modalBody = this.elem.querySelector('.modal__body');
+		this.modalBody = this.modal.querySelector('.modal__body');
 		this.modalBody.firstChild.remove();
 		this.modalBody.append(ModalBodyInner);	
 	}
 
 	open() {
-		document.body.append(this.elem);
+		document.body.append(this.modal);
 		document.body.classList.add('is-modal-open');
 
 		const closeBtn = document.querySelector('.modal__close');
@@ -57,20 +62,17 @@ export default class Modal {
 	}
 
 	close() { 
-		document.querySelector('.modal').remove();
-		//this.elem.remove();
+		this.modal.remove();
 		document.body.classList.remove('is-modal-open');
 		document.body.removeEventListener('keydown', this.closeEsc);
 	}
 
 	closeEsc(event) { 
 		if (event.code === 'Escape') {
-			document.querySelector('.modal').remove();
-			//this.elem.remove();
+			this.modal.remove();
 			document.body.classList.remove('is-modal-open');
 			document.body.removeEventListener('keydown', this.closeEsc);
 		}
 	}
-
 
 }
