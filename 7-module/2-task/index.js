@@ -2,11 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
 	constructor() {
-		
-	}
-
-	setTitle(title) { 
-			this.modal.querySelector('.modal__title').textContent = title;
+		this.elem = this.render();	
 	}
 	
 	render() { 
@@ -24,34 +20,57 @@ export default class Modal {
 						</button>
 
 						<h3 class="modal__title">
-													{/*  Вот сюда нужно добавлять заголовок */}
+												
 						</h3>
 
 					</div>
 
 					<div class="modal__body">
-										{/* A сюда нужно добавлять содержимое тела модального окна */}
 					</div>
     			</div>
 
   			</div>
 		`);
 
-		
 		return this.modal;
 
 	}
-
-	openModal() {
-		document.body.append(this.modal);
-		document.body.classList.add('is-modal-open');
-	}
 	
-	setBody(modal) { 
-		this.modal.querySelector('.modal__title').textContent = value;
+	setTitle(title) { 
+		this.modalTitle = this.elem.querySelector('.modal__title');
+		this.modalTitle.textContent = title;
 	}
 
+	setBody(ModalBodyInner) { 
+		this.modalBody = this.elem.querySelector('.modal__body');
+		this.modalBody.firstChild.remove();
+		this.modalBody.append(ModalBodyInner);	
+	}
 
+	open() {
+		document.body.append(this.elem);
+		document.body.classList.add('is-modal-open');
+
+		const closeBtn = document.querySelector('.modal__close');
+		closeBtn.addEventListener('click', this.close);
+		document.body.addEventListener('keydown', this.closeEsc);
+	}
+
+	close() { 
+		document.querySelector('.modal').remove();
+		//this.elem.remove();
+		document.body.classList.remove('is-modal-open');
+		document.body.removeEventListener('keydown', this.closeEsc);
+	}
+
+	closeEsc(event) { 
+		if (event.code === 'Escape') {
+			document.querySelector('.modal').remove();
+			//this.elem.remove();
+			document.body.classList.remove('is-modal-open');
+			document.body.removeEventListener('keydown', this.closeEsc);
+		}
+	}
 
 
 }
