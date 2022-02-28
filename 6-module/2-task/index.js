@@ -21,19 +21,17 @@ export default class ProductCard {
 			</div>
 		`);
 
-		this.buttons = this.card.querySelectorAll('.card__button');
+		this.btn = this.card.querySelector('.card__button');
 
-		for (const btn of this.buttons) {
-			btn.addEventListener('click', () => {
+		this.btn.addEventListener('click', () => {
 
-				const productAddEvent = new CustomEvent("product-add", {
-					detail: this.product.id,
-					bubbles: true
-				});
-
-				btn.dispatchEvent(productAddEvent);
+			const productAddEvent = new CustomEvent("product-add", {
+				detail: this.product.id,
+				bubbles: true
 			});
-		}
+
+				this.card.dispatchEvent(productAddEvent);
+			});
 
 		return this.card;
 	}
